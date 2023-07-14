@@ -1,8 +1,8 @@
-import Square from "./Square";
+import Square from './Square';
 
 export function WinnerModal({ winner, resetGame }) {
   if (winner === null) return;
-  const winnerText = winner === false ? "Empate" : `Ha ganado: ${winner}`;
+  const winnerText = winner === false ? 'Empate' : `Ha ganado: ${winner}`;
 
   return (
     <section className="winner">

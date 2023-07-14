@@ -1,20 +1,20 @@
-import { useState } from "react";
-import confetti from "canvas-confetti";
+import { useState } from 'react';
+import confetti from 'canvas-confetti';
 
-import Square from "./components/Square";
-import { TURNS } from "./constants";
-import { WinnerModal } from "./components/WinnerModal";
-import { checkWinnerFrom, checkEndGameFrom } from "./logic/board.js";
+import Square from './components/Square';
+import { TURNS } from './constants';
+import { WinnerModal } from './components/WinnerModal';
+import { checkWinnerFrom, checkEndGameFrom } from './logic/board.js';
 
 function App() {
   const [board, setBoard] = useState(() => {
-    const boardFromStorage = localStorage.getItem("board");
+    const boardFromStorage = window.localStorage.getItem('board');
     if (boardFromStorage) return JSON.parse(boardFromStorage);
     return Array(9).fill(null);
   });
 
   const [turn, setTurn] = useState(() => {
-    const turnFromStorage = localStorage.getItem("turn");
+    const turnFromStorage = window.localStorage.getItem('turn');
 
     return turnFromStorage ?? TURNS.X;
   });
@@ -26,8 +26,8 @@ function App() {
     setTurn(TURNS.X);
     setWinner(null);
 
-    localStorage.removeItem("board");
-    localStorage.removeItem("turn");
+    window.localStorage.removeItem('board');
+    window.localStorage.removeItem('turn');
   };
 
   const updatedBoard = (index) => {
@@ -44,9 +44,9 @@ function App() {
     setTurn(newTurn);
 
     // Guardar el board en el localStorage
-    localStorage.setItem("board", JSON.stringify(newBoard));
+    window.localStorage.setItem('board', JSON.stringify(newBoard));
     // Guardar el turno en el localStorage
-    localStorage.setItem("turn", newTurn);
+    window.localStorage.setItem('turn', newTurn);
 
     // Check para ver si tenemos un ganador
     const newWinner = checkWinnerFrom(newBoard);

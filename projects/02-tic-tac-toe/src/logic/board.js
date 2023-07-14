@@ -1,4 +1,4 @@
-import { WINNING_COMBINATIONS } from "../constants.js";
+import { WINNING_COMBINATIONS } from '../constants.js';
 
 //Función para determinar si hay un ganador
 export const checkWinnerFrom = (boardToCheck) => {
