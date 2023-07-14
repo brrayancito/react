@@ -15,8 +15,8 @@ function App() {
 
   const [turn, setTurn] = useState(() => {
     const turnFromStorage = localStorage.getItem("turn");
-    if (turnFromStorage) return turnFromStorage;
-    return TURNS.X;
+
+    return turnFromStorage ?? TURNS.X;
   });
 
   const [winner, setWinner] = useState(null); // Null: Ninguno , False: Empate, True: Ganador
