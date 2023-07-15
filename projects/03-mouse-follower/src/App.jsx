@@ -5,6 +5,7 @@ function App() {
   const [enabled, setEnabled] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
+  // Pointer Move
   useEffect(() => {
     console.log('useEffect', { enabled });
 
@@ -23,6 +24,17 @@ function App() {
       window.removeEventListener('pointermove', handleMove);
     };
   }, [enabled]);
+
+  // Change body className
+  useEffect(() => {
+    document.body.classList.toggle('no-cursor', enabled);
+
+    return () => {
+      document.body.classList.remove('no-cursor');
+    };
+  }, [enabled]);
+
+  // Change body backgroundColor
 
   return (
     <>
