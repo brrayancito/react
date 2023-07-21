@@ -1,4 +1,4 @@
-import { useState, useRef, useMemo, useEffect } from 'react'
+import { useState, useRef, useMemo, useEffect, useCallback } from 'react'
 import { searchMovies } from '../services/searchMovies'
 
 export function useMovies ({ search, sort }) {
@@ -7,26 +7,45 @@ export function useMovies ({ search, sort }) {
   const [error, setError] = useState(false)
   const previousSearch = useRef(search)
 
-  const getMovies = useMemo(() => {
-    return async ({ search }) => {
-      if (previousSearch.current === search) return
+  const getMovies = useCallback(async ({ search }) => {
+    if (previousSearch.current === search) return
 
-      try {
-        setLoading(true)
-        setError(null)
+    try {
+      setLoading(true)
+      setError(null)
 
-        previousSearch.current = search
+      previousSearch.current = search
 
-        const newMovies = await searchMovies(search)
-        setMovies(newMovies)
-      } catch (error) {
-        console.log('Something went wrong')
-        setError(error.message)
-      } finally {
-        setLoading(false)
-      }
+      const newMovies = await searchMovies(search)
+      setMovies(newMovies)
+    } catch (error) {
+      console.log('Something went wrong')
+      setError(error.message)
+    } finally {
+      setLoading(false)
     }
   }, [])
+
+  //   const getMovies = useMemo(() => {
+  //     return async ({ search }) => {
+  //       if (previousSearch.current === search) return
+
+  //       try {
+  //         setLoading(true)
+  //         setError(null)
+
+  //         previousSearch.current = search
+
+  //         const newMovies = await searchMovies(search)
+  //         setMovies(newMovies)
+  //       } catch (error) {
+  //         console.log('Something went wrong')
+  //         setError(error.message)
+  //       } finally {
+  //         setLoading(false)
+  //       }
+  //     }
+  //   }, [])
 
   const sortedMovies = useMemo(() => {
     return sort
