@@ -1,4 +1,5 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
+import debounce from 'just-debounce-it'
 
 import './App.css'
 import { Movies } from './components/Movies.jsx'
@@ -32,22 +33,28 @@ function App () {
   const { search, updateSearch, error } = useSearch()
   const { movies, getMovies, loading } = useMovies({ search, sort })
 
+  const debouncedGetMovies = useCallback(
+    debounce(search => {
+      console.log('En cada render ejecuto esto:')
+      getMovies({ search })
+    }, 400)
+    , [getMovies]
+  )
+
   const handleSubmit = (event) => {
     event.preventDefault()
     getMovies({ search })
   }
 
   const handleChange = (event) => {
-    updateSearch(event.target.value)
+    const newSearch = event.target.value
+    updateSearch(newSearch)
+    debouncedGetMovies(newSearch)
   }
 
   const handleSort = () => {
     setSort(!sort)
   }
-
-  useEffect(() => {
-    console.log('holii')
-  }, [getMovies])
 
   return (
     <div className='page'>
