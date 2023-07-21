@@ -37,7 +37,6 @@ function App () {
   }
 
   const handleChange = (event) => {
-    console.log(event.target.value)
     updateSearch(event.target.value)
   }
 
