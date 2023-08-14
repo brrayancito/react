@@ -1,5 +1,6 @@
 import './Products.css'
 import { AddToCartIcon } from './Icons.jsx'
+import useFilters from '../hooks/useFilters'
 
 export function Products ({ products }) {
   return (
