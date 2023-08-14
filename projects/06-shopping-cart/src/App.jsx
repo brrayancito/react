@@ -3,6 +3,7 @@ import { products as initialProducts } from './mocks/products.json'
 import { Header } from './components/Header.jsx'
 import { Footer } from './components/Footer'
 import { Products } from './components/Products.jsx'
+import { Cart } from './components/Cart.jsx'
 import useFilters from './hooks/useFilters'
 
 function App () {
@@ -13,9 +14,10 @@ function App () {
 
   return (
     <>
-    <Header/>
-    <Products products={filteredProducts} />
-    <Footer />
+      <Header />
+      <Cart />
+      <Products products={filteredProducts} />
+      <Footer />
     </>
   )
 }
