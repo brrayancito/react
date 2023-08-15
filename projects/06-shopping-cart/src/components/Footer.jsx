@@ -6,11 +6,8 @@ export function Footer () {
 
   return (
     <footer className='footer'>
-      {/* <h4>React Technical interview ⚛️</h4>
-      <h5>Shopping Cart with useContext & useReducer</h5> */}
-      {
-        JSON.stringify(cart, null, 2)
-      }
+      <h4>React Technical interview ⚛️</h4>
+      <h5>Shopping Cart with useContext & useReducer</h5>
     </footer>
   )
 }
